@@ -1,3 +1,5 @@
+#-*-coding:utf-8-*-
+# ---- dsiervo@sgc.gov.co -------
 import os, multiprocessing, sys
 fo = sys.argv[1]
 
