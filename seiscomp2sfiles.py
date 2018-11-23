@@ -20,13 +20,14 @@ endtime = UTCDateTime("2018 02 25 00 40")
 client = Client(server_IP+":"+port_fdsn)
 
 # catalogo de eventos correspondiente al select
-cat = client.get_events(starttime=starttime, endtime=endtime)
+cat = client.get_events(starttime=starttime, endtime=endtime, includearrivals=True)
                         #minlatitude=10, maxlatitude=14,
                         #minlongitude=-82, maxlongitude=-80)
 
 print len(cat)
 
 folder_name = "migracion_prueba_sfiles"
+
 os.system("mkdir %s"%folder_name)
 for event in cat:
     try:
@@ -45,7 +46,7 @@ for event in cat:
         "-"+str(time.second).rjust(2,"0")+"L.S"+str(time.year)+str(time.month).rjust(2,"0")
         event.write(folder_name+"/"+name, format="NORDIC", userid="anls",
                    wavefiles=[w])
-        print 'Output file name: ' +  name
+        print 'Output file name: ' + folder_name +"/"+ name
     except Exception as e:
         print e
         print name
